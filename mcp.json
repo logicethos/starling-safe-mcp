@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "starling": {
+      "command": "npx",
+      "args": ["-y", "starling-safe-mcp"],
+      "env": {
+        "STARLING_ACCESS_TOKEN": "${STARLING_ACCESS_TOKEN}"
+      }
+    }
+  }
+}

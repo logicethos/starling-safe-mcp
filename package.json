@@ -1,0 +1,55 @@
+{
+  "name": "starling-safe-mcp",
+  "version": "0.1.0",
+  "description": "Local stdio MCP server for Starling Bank. Reads accounts and transactions, and makes safe edits to notes, categories, and your own savings goals. No payments.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Stuart Johnson (Logic Ethos Ltd)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/logicethos/starling-safe-mcp.git"
+  },
+  "homepage": "https://github.com/logicethos/starling-safe-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/logicethos/starling-safe-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "starling",
+    "starling-bank",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "starling-safe-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "test": "tsc -p tsconfig.json && tsc -p tsconfig.test.json --noEmit && vitest run",
+    "prepublishOnly": "npm test",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
+    "@types/node": "^22.19.1",
+    "typescript": "~7.0.2",
+    "vitest": "~5.1.1"
+  }
+}

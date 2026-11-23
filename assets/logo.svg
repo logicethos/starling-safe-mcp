@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ledger card and safe dial</title>
+  <desc id="desc">Original square mark: a cream statement card and a brass safe dial on a pine background. Not a Starling Bank logo.</desc>
+  <rect width="512" height="512" fill="#14342C"/>
+  <rect x="48" y="48" width="416" height="416" rx="80" fill="#F4EFE4"/>
+  <rect x="96" y="108" width="200" height="28" rx="14" fill="#1B4336"/>
+  <rect x="96" y="160" width="148" height="22" rx="11" fill="#C6A15B"/>
+  <rect x="96" y="206" width="228" height="22" rx="11" fill="#2F6F5E"/>
+  <rect x="96" y="252" width="124" height="22" rx="11" fill="#1B4336"/>
+  <circle cx="348" cy="332" r="86" fill="#14342C"/>
+  <circle cx="348" cy="332" r="58" fill="none" stroke="#E4C98A" stroke-width="14"/>
+  <circle cx="348" cy="332" r="12" fill="#E4C98A"/>
+  <rect x="340" y="252" width="16" height="38" rx="8" fill="#E4C98A"/>
+</svg>

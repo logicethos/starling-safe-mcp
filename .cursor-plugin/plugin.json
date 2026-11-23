@@ -1,0 +1,24 @@
+{
+  "name": "starling-safe-mcp",
+  "version": "0.1.0",
+  "description": "Independent Starling account tools: check balances, summarise spending, and make safe edits to notes, categories, and your own savings goals. No payments. Not affiliated with Starling Bank.",
+  "author": {
+    "name": "Logic Ethos Ltd"
+  },
+  "license": "MIT",
+  "keywords": ["banking", "accounts", "spending", "savings", "mcp"],
+  "logo": "assets/logo.svg",
+  "skills": "skills/",
+  "mcpServers": "mcp.json",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "STARLING_ACCESS_TOKEN": {
+        "type": "string",
+        "title": "Starling personal access token (secret)",
+        "description": "Secret personal access token from the Starling Developer Portal. You enter it at install (Plugins, then Configure). It is passed to the server as the STARLING_ACCESS_TOKEN environment variable and is never stored in this repository."
+      }
+    },
+    "required": ["STARLING_ACCESS_TOKEN"]
+  }
+}
