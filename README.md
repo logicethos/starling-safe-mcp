@@ -55,7 +55,7 @@ This repository is a Cursor plugin named `starling-safe-mcp` (the package Grok B
 1. Open **Customize**.
 2. Find `starling-safe-mcp` and choose **Install**.
 3. When asked, enter your Starling personal access token. That prompt is the plugin variable `STARLING_ACCESS_TOKEN`. It is a secret you set at install (or later under Plugins → Configure). It is not stored in this repository. Cursor passes it to the server as the environment variable of the same name.
-4. The plugin starts `npx -y starling-safe-mcp` on stdio. That command downloads the npm package, so the `v0.1.0` release has to be on npm before a marketplace install can start the server. Until then, run a local build as below.
+4. The plugin starts `npx -y github:logicethos/starling-safe-mcp#v0.1.0` on stdio. That installs this repository from GitHub at the `v0.1.0` tag. It is not published to npm. The compiled server is already in the repository, so the install does not compile TypeScript.
 
 The installed server uses Starling production (`api.starlingbank.com`). It does not set `STARLING_API_HOST`. Sandbox testing is in [SUBMITTING.md](SUBMITTING.md).
 
@@ -67,14 +67,20 @@ Create the token with the scopes above before you install. Leave payment scopes 
 
 Node.js 20 or newer.
 
+Clone and run the committed server. There is no compile step:
+
 ```bash
-npm install
-npm test
-npm run build
+git clone https://github.com/logicethos/starling-safe-mcp.git
+cd starling-safe-mcp
+npm install --omit=dev
 STARLING_ACCESS_TOKEN="your-personal-access-token" node dist/index.js
 ```
 
+`npm install --omit=dev` only downloads the runtime packages. `dist/index.js` is already in the clone, and it starts with `#!/usr/bin/env node`.
+
 The process speaks MCP on stdin and stdout. Logs, if any, go to stderr and do not include the token or transaction text.
+
+To change the source, run `npm ci` and `npm test`. The test rebuilds `dist/`. Commit that rebuilt `dist/` with the source change.
 
 Sandbox:
 
@@ -86,13 +92,14 @@ node dist/index.js
 
 `STARLING_API_HOST` may only be `api.starlingbank.com` (the default) or `api-sandbox.starlingbank.com`.
 
-The marketplace plugin runs the same command once the package is on npm:
+The marketplace plugin runs the tagged GitHub repository, not an npm package:
 
 ```bash
-STARLING_ACCESS_TOKEN="your-personal-access-token" npx -y starling-safe-mcp
+STARLING_ACCESS_TOKEN="your-personal-access-token" \
+  npx -y github:logicethos/starling-safe-mcp#v0.1.0
 ```
 
-Pushing a version tag such as `v0.1.0` (the tag must match `package.json`) runs the publish workflow. Provenance is turned on. The workflow reads the `NPM_TOKEN` repository secret and does not print it. Until that release exists, `npx` cannot download the package; use `node dist/index.js`.
+The tag `v0.1.0` is the release the plugin installs. The same command without `#v0.1.0` follows the default branch.
 
 ## Add it as a command connector
 
@@ -112,14 +119,14 @@ Point the MCP client at the command, and put the token in the command environmen
 }
 ```
 
-The marketplace `mcp.json` does not contain a token. It runs the published package and substitutes the install-time secret:
+The marketplace `mcp.json` does not contain a token. It installs the tagged repository and substitutes the install-time secret:
 
 ```json
 {
   "mcpServers": {
     "starling": {
       "command": "npx",
-      "args": ["-y", "starling-safe-mcp"],
+      "args": ["-y", "github:logicethos/starling-safe-mcp#v0.1.0"],
       "env": {
         "STARLING_ACCESS_TOKEN": "${STARLING_ACCESS_TOKEN}"
       }

@@ -1,8 +1,14 @@
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 describe("stdio entry", () => {
+  it("commits the bin entry with a node shebang", () => {
+    const entry = readFileSync("dist/index.js", "utf8");
+    expect(entry.startsWith("#!/usr/bin/env node\n")).toBe(true);
+  });
+
   it("exits when STARLING_ACCESS_TOKEN is missing", async () => {
     const child = spawn(process.execPath, ["dist/index.js"], {
       env: { PATH: process.env.PATH ?? "", HOME: process.env.HOME ?? "" },

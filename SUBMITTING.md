@@ -8,9 +8,10 @@ Independent local MCP server for a Starling personal access token: it reads bala
 
 1. Clone the repository and run `npm ci && npm test`. Node.js 20 or newer is required (the workflow uses 22). Every test should pass. No token is required, and the tests do not call Starling.
 2. Open the [Starling sandbox developer portal](https://developer-sandbox.starlingbank.com/) and create a personal access token. Tick only the scopes in [Token scopes](#token-scopes). Do not tick a payment, payee-write, standing-order, or mandate-delete scope.
-3. From the repository root, after step 1 has produced `dist/`, start the server against the sandbox host:
+3. `dist/` is already committed, so a clone can run without compiling. From the repository root, install runtime dependencies and start the server against the sandbox host:
 
    ```bash
+   npm install --omit=dev
    STARLING_ACCESS_TOKEN="<sandbox personal access token>" \
    STARLING_API_HOST=api-sandbox.starlingbank.com \
    node dist/index.js
@@ -20,7 +21,7 @@ Independent local MCP server for a Starling personal access token: it reads bala
 4. Point an MCP client at that process on stdio (the token stays in the environment, not in the arguments). Call `list_accounts`, then `get_balance` for one returned account, then `summarise_spending`. Confirm the replies are account data and that no money moves.
 5. Ask for a change to one sandbox transaction note. Confirm the assistant shows a preview that names the transaction and the exact new note, and that it does not call `update_transaction_note` until you agree. After you agree, confirm the call includes `confirmed: true` and the result describes the change. Repeat the same preview-then-confirm check for one savings-goal transfer if the sandbox account has a goal: the preview must show the amount, currency, and goal, and a successful call must not be retried.
 6. Confirm a write with `confirmed` omitted or set to anything other than `true` fails with the server's confirmation error, and that the account is unchanged.
-7. Check the marketplace package without a token. `.cursor-plugin/plugin.json` names the plugin `starling-safe-mcp`, points `logo` at `assets/logo.svg`, and declares `STARLING_ACCESS_TOKEN` as a required string the user enters at install. `mcp.json` runs `npx` with args `-y` and `starling-safe-mcp`, and its env value is the placeholder `${STARLING_ACCESS_TOKEN}` with no real token. `skills/starling-banking/SKILL.md` has `name` and `description` frontmatter. The installed server talks to production; sandbox still needs `STARLING_API_HOST=api-sandbox.starlingbank.com` on a manual run, as in step 3.
+7. Check the marketplace package without a real token. `.cursor-plugin/plugin.json` names the plugin `starling-safe-mcp`, points `logo` at `assets/logo.svg`, and declares `STARLING_ACCESS_TOKEN` as a required string the user enters at install. `mcp.json` runs `npx` with args `-y` and `github:logicethos/starling-safe-mcp#v0.1.0`, and its env value is the placeholder `${STARLING_ACCESS_TOKEN}` with no real token. `skills/starling-banking/SKILL.md` has `name` and `description` frontmatter. The installed server talks to production. Sandbox still needs `STARLING_API_HOST=api-sandbox.starlingbank.com` on a manual run, as in step 3. This package is not published to npm.
 
 ## Token scopes
 

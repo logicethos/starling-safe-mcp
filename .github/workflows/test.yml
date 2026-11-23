@@ -25,3 +25,6 @@ jobs:
 
       - name: Test
         run: npm test
+
+      - name: Confirm the committed build matches
+        run: git diff --exit-code -- dist

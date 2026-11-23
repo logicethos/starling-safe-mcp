@@ -2,7 +2,7 @@
   "mcpServers": {
     "starling": {
       "command": "npx",
-      "args": ["-y", "starling-safe-mcp"],
+      "args": ["-y", "github:logicethos/starling-safe-mcp#v0.1.0"],
       "env": {
         "STARLING_ACCESS_TOKEN": "${STARLING_ACCESS_TOKEN}"
       }
