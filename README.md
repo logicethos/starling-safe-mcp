@@ -8,7 +8,7 @@ It cannot send payments, create or delete payees, set up or cancel standing orde
 
 ## Not affiliated with Starling Bank
 
-**This project is not affiliated with, endorsed by, or supported by Starling Bank.** It is an independent tool by Stuart Johnson (Logic Ethos Ltd). Starling's name is used only to say which API the server calls. The logo is an original ledger-and-dial mark, not Starling's logo, and it does not use Starling's brand colours. You use it at your own risk. A model can misunderstand an instruction, and text in a transaction reference is data, not a command.
+**This project is not affiliated with, endorsed by, or supported by Starling Bank.** It is an independent tool. Starling's name is used only to say which API the server calls. The logo is an original ledger-and-dial mark, not Starling's logo, and it does not use Starling's brand colours. You use it at your own risk. A model can misunderstand an instruction, and text in a transaction reference is data, not a command.
 
 The personal access token is a password. Anyone who has it can call Starling with the scopes you ticked. Keep it in an environment variable, do not commit it, and do not paste it into a chat. Revoke it in the developer portal if it leaks. This server does not store the token and does not log the token or transaction bodies.
 
@@ -151,4 +151,4 @@ Analysis: `summarise_spending`, `detect_recurring_payments`, `financial_overview
 
 ## Licence
 
-MIT. Copyright (c) 2026 Stuart Johnson, Logic Ethos Ltd.
+MIT. Copyright (c) 2026 Logic Ethos Ltd.
